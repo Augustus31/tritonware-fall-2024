@@ -7,54 +7,43 @@ public class PlayerScript : MonoBehaviour
 {
     public float speed;
     protected Vector3 velocity;
+    protected Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        velocity = new Vector3(0, 0, 0);
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = new Vector2(0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        rb.velocity = new Vector2(0, 0);
+
         //on key press (movement)
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
-            velocity.y += 1;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 1);
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
-            velocity.x -= 1;
+            rb.velocity = new Vector2(rb.velocity.x - 1, rb.velocity.y);
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
-            velocity.y -= 1;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - 1);
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
-            velocity.x += 1;
-        }
-
-        //on key release (end movement)
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-            velocity.y -= 1;
-        }
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            velocity.x += 1;
-        }
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            velocity.y += 1;
-        }
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            velocity.x -= 1;
+            rb.velocity = new Vector2(rb.velocity.x + 1, rb.velocity.y);
         }
 
-        //add velocity to position
-        transform.position += velocity.normalized * speed * Time.deltaTime;
+        rb.velocity = rb.velocity.normalized * speed;
     }
 
+    public void death()
+    {
+        GameControllerScript.GC.restartLevel();
+    }
 }
