@@ -6,8 +6,9 @@ using UnityEngine.UIElements;
 public class PlayerScript : MonoBehaviour
 {
     public float speed;
-    protected Vector3 velocity;
-    protected Rigidbody2D rb;
+    private Rigidbody2D rb;
+    private Weapon weapon1;
+    private Weapon weapon2;
 
     // Start is called before the first frame update
     void Start()
