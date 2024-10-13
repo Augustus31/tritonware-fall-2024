@@ -12,9 +12,9 @@ public class Room : MonoBehaviour
     public GameObject wall;
     public GameObject floor;
     public GameObject enemy;
-    public roomSize;
-    public roomX;
-    public roomY;
+    public int roomSize;
+    public int roomX;
+    public int roomY;
     // Start is called before the first frame update
     void Start()
     {
