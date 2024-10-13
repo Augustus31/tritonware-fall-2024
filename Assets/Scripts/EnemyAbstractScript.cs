@@ -9,7 +9,7 @@ public abstract class EnemyAbstractScript : MonoBehaviour
     protected GameObject player;
     protected Rigidbody2D rb;
 
-    void death()
+    public void death()
     {
         Destroy(this.gameObject);
     }

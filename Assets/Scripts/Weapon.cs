@@ -12,7 +12,7 @@ public abstract class Weapon
     {
         this.fireRate = fireRate;
         this.melee = melee;
-        // assign gameobject projectile
+        this.projectile = (GameObject)Resources.Load("Prefabs/" + projectile + "Projectile");
         disabled = false;
     }
 

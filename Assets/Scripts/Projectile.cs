@@ -3,47 +3,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public abstract class Projectile : MonoBehaviour
 {
     public float speed;
-    public Vector2 direction;
     public float lifeTime;
-    public float damage;   
+    public float damage;
+    public int owner; //0 for player, 1 for enemy
     private Rigidbody2D rb;
-    public GameObject origin;
-
-    public Projectile(Vector2 direction, GameObject origin, float speed = 10f, float lifeTime = 5f, float damage = 10f)
-    {
-        this.direction = direction;
-        this.origin = origin;
-        this.speed = speed; 
-        this.lifeTime = lifeTime;
-        this.damage = damage;   
-    } 
 
     // Start is called before the first frame update
     void Start()
     {
         // Get the Rigidbody component
         rb = GetComponent<Rigidbody2D>();
-        
-        // Move the projectile forward with specified speed
-        rb.velocity = direction * speed; // Assuming the projectile is fired along the x-axis (right direction)
 
         // Destroy the projectile after 'lifetime' seconds
         Destroy(gameObject, lifeTime);
     }
-    void OnCollisionEnter2D(Collision2D collision) 
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject != origin && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player"))
+        if(owner == 0)
         {
-            Destroy(gameObject);
-            Destroy(collision.gameObject);
+            if (collision.gameObject.tag == "Enemy")
+            {
+                Destroy(gameObject);
+                collision.gameObject.GetComponent<EnemyAbstractScript>().death();
+            }
+        }
+        else if(owner == 1)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                Destroy(gameObject);
+                collision.gameObject.GetComponent<PlayerScript>().death();
+            }
         }
     }
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = direction * speed;    
+
     }
 }

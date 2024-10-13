@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pistol : Weapon
 {
     // Start is called before the first frame update
-    public Pistol() : base(2f, false, "standard")
+    public Pistol() : base(2f, false, "Standard")
     {
         
     }
@@ -14,5 +14,6 @@ public class Pistol : Weapon
         GameObject bullet = GameObject.Instantiate(projectile, gunPos, Quaternion.identity);
         bullet.transform.Rotate(new Vector3(0, 0, Mathf.Atan2(mousePos.y - gunPos.y, mousePos.x - gunPos.x)));
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector2((mousePos - gunPos).x, (mousePos - gunPos).y).normalized * bullet.GetComponent<Projectile>().speed;
+        bullet.GetComponent<Projectile>().owner = 0;
     }
 }
