@@ -22,7 +22,21 @@ public class Room : MonoBehaviour
         floor = Resources.Load<GameObject>("./Prefabs/floor");
         wall = Resources.Load<GameObject>("./Prefabs/wall");
 
-
+        for (int i = 0; i < roomSize + 1; i++)
+        {
+            for (int j = 0; j < roomSize + 1; j++)
+            {
+                if (isOnPerimeter(i, j, roomSize + 1))
+                {
+                    wall = Instantiate(wall, new Vector2(i, j), Quaternion.identity);
+                    tiles.Add(wall);
+                } else
+                {
+                    floor = Instantiate(wall, new Vector2(i, j), Quaternion.identity);
+                    tiles.Add(floor);
+                }
+            }
+        }
 
     }
 
@@ -32,7 +46,7 @@ public class Room : MonoBehaviour
         
     }
 
-    private bool IsOnPerimeter(int x, int y, int size)
+    private bool isOnPerimeter(int x, int y, int size)
     {
         return (x == 0 || x == size - 1 || y == 0 || y == size - 1);
     }
