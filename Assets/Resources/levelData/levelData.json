@@ -1,0 +1,38 @@
+{
+  "levels": [
+    {
+      "levelId": 1,
+      "rooms": [
+        {
+          "roomId": 1,
+          "roomX": 0,
+          "roomY":  0,
+          "roomSize": 15
+        },
+        {
+          "roomId": 2,
+          "roomX": 0,
+          "roomY": 0,
+          "roomSize": 15
+        }
+      ]
+    },
+    {
+      "levelId": 2,
+      "rooms": [
+        {
+          "roomId": 1,
+          "roomX": 0,
+          "roomY": 0,
+          "roomSize": 15
+        },
+        {
+          "roomId": 2,
+          "roomX": 0,
+          "roomY": 0,
+          "roomSize": 15
+        }
+      ]
+    }
+  ]
+}
