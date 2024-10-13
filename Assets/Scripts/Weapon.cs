@@ -5,24 +5,17 @@ using UnityEngine;
 public abstract class Weapon
 {
     protected float fireRate;
-    protected bool disabled;
     protected bool melee;
     protected GameObject projectile;
+    protected GameObject player;
     public Weapon(float fireRate, bool melee, string projectile)
     {
         this.fireRate = fireRate;
         this.melee = melee;
         this.projectile = (GameObject)Resources.Load("Prefabs/" + projectile + "Projectile");
-        disabled = false;
+        player = GameObject.Find("Player");
     }
 
     public abstract void shoot(Vector3 gunPos, Vector3 mousePos);
-
-    public IEnumerator disabler()
-    {
-        disabled = true;
-        yield return new WaitForSeconds(1 / fireRate);
-        disabled = false;
-    }
 
 }

@@ -9,13 +9,16 @@ public abstract class Projectile : MonoBehaviour
     public float lifeTime;
     public float damage;
     public int owner; //0 for player, 1 for enemy
+    public Vector2 target;
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         // Get the Rigidbody component
         rb = GetComponent<Rigidbody2D>();
+
+        rb.velocity = (target - new Vector2(transform.position.x, transform.position.y)).normalized * speed;
 
         // Destroy the projectile after 'lifetime' seconds
         Destroy(gameObject, lifeTime);
@@ -38,10 +41,5 @@ public abstract class Projectile : MonoBehaviour
                 collision.gameObject.GetComponent<PlayerScript>().death();
             }
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
