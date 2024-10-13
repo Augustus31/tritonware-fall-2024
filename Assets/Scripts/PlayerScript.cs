@@ -16,7 +16,7 @@ public class PlayerScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(0, 0);
-        weapon1 = new Pistol();
+        weapon1 = new Shotgun();
         disabled = false;
     }
 
