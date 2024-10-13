@@ -19,8 +19,8 @@ public class Room : MonoBehaviour
     void Start()
     {
         rand = new System.Random();
-        floor = Resources.Load<GameObject>("./Prefabs/floor");
-        wall = Resources.Load<GameObject>("./Prefabs/wall");
+        floor = Resources.Load<GameObject>("Prefabs/floor");
+        wall = Resources.Load<GameObject>("Prefabs/wall");
 
         for (int i = 0; i < roomSize + 1; i++)
         {
@@ -32,7 +32,7 @@ public class Room : MonoBehaviour
                     tiles.Add(wall);
                 } else
                 {
-                    floor = Instantiate(wall, new Vector2(i, j), Quaternion.identity);
+                    floor = Instantiate(floor, new Vector2(i, j), Quaternion.identity);
                     tiles.Add(floor);
                 }
             }
