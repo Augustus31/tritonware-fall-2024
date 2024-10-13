@@ -56,8 +56,8 @@ public class RoomController : MonoBehaviour
     void loadLevel()
     {
         currentLevel = Instantiate(room, new Vector2(0, 0), Quaternion.identity);
-        currentLevel.roomSize = levels[0].rooms[0].roomSize;
-        currentLevel.roomX = 0;
-        currentLevel.roomY = 0;
+        currentLevel.GetComponent<Room>().roomSize = levels[0].rooms[0].roomSize;
+        currentLevel.GetComponent<Room>().roomX = 0;
+        currentLevel.GetComponent<Room>().roomY = 0;
     }
 }
