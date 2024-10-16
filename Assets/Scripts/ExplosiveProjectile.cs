@@ -42,7 +42,8 @@ public class ExplodingProjectile : Projectile
                 EnemyAbstractScript enemy = obj.GetComponent<EnemyAbstractScript>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(damage); // Call the TakeDamage method with the projectile's damage
+                    enemy.death();
+                    // Call the TakeDamage method with the projectile's damage
                 }
             }
         }
