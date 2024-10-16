@@ -24,6 +24,9 @@ public class GameControllerScript : MonoBehaviour
     void Start()
     {
         level = 1;
+
+        GameObject collectible = GameObject.Instantiate((GameObject)Resources.Load("Prefabs/CollectibleWeapon"), transform.position - new Vector3(3,-3,0), Quaternion.identity);
+        collectible.GetComponent<CollectibleWeaponScript>().weapon = new Shotgun();
     }
 
     // Update is called once per frame

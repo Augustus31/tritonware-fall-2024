@@ -7,7 +7,7 @@ public class Shotgun : Weapon
     private int numPellets;
     private float spreadAngle;
     // Start is called before the first frame update
-    public Shotgun(float firerate = .5f, int numPellets = 5, float spreadAngle = 15f) : base(firerate, false, "Shotgun")
+    public Shotgun(float firerate = .5f, int numPellets = 5, float spreadAngle = 15f) : base(firerate, false, "Shotgun", "Shotgun")
     {
         this.numPellets = numPellets;
         this.spreadAngle = spreadAngle;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pistol : Weapon
 {
     // Start is called before the first frame update
-    public Pistol() : base(2f, false, "Standard")
+    public Pistol() : base(2f, false, "Standard", "Pistol")
     {
         
     }
