@@ -27,6 +27,9 @@ public class GameControllerScript : MonoBehaviour
 
         GameObject collectible = GameObject.Instantiate((GameObject)Resources.Load("Prefabs/CollectibleWeapon"), transform.position - new Vector3(3,-3,0), Quaternion.identity);
         collectible.GetComponent<CollectibleWeaponScript>().weapon = new Shotgun();
+
+        GameObject rangedEnemy = GameObject.Instantiate((GameObject)Resources.Load("Prefabs/RangedEnemy"), transform.position - new Vector3(-3, -3, 1), Quaternion.identity);
+        rangedEnemy.GetComponent<RangedEnemyScript>().weapon = new StormPistol();
     }
 
     // Update is called once per frame

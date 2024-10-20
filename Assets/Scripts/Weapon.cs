@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Weapon
 {
-    protected float fireRate;
+    public float fireRate;
     protected bool melee;
     protected GameObject projectile;
     protected GameObject player;
