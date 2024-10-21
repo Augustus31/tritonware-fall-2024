@@ -6,22 +6,20 @@ using UnityEngine;
 public class MeleeEnemyScript : EnemyAbstractScript
 {
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
         room = 1;
         speed = 2;
-        player = GameObject.Find("Player");
-        rb = GetComponent<Rigidbody2D>();
-        //StartCoroutine(WaitForObject());
+        base.Start();
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
         Vector2 position = rb.position;
         (int, int) newCord = ((int)Math.Floor(position.x), (int)Math.Floor(position.y));
         rb.velocity = FindBestDirection(new int[16, 16], newCord, (14, 14)) * speed;
-        Debug.Log(rb.velocity);
+        base.Update();
     }
     /*
     private IEnumerator WaitForObject()

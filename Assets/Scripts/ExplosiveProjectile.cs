@@ -1,17 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-public class ExplodingProjectile : Projectile
+public class ExplosiveProjectile : Projectile
 {
-    public float explosionRadius = 5f; // Radius of explosion
-    public LayerMask damageableLayer;  // Layer mask for objects that can be damaged
 
     // Override the Start method from Projectile to start with movement
     public override void Start()
     {
-        speed = 5f;    // Set speed of the projectile
-        lifeTime = 2f;  // Set the lifetime before explosion
-        base.Start();   // Call the base class to handle movement
+        speed = 15f;    // Set speed of the projectile
+        lifeTime = 0.7f;  // Set the lifetime before explosion
+        rb = GetComponent<Rigidbody2D>();
+
+        rb.velocity = (target - new Vector2(transform.position.x, transform.position.y)).normalized * speed;
 
         // Start a coroutine to handle the explosion after lifetime
         StartCoroutine(ExplodeAfterTime(lifeTime));
@@ -27,44 +27,14 @@ public class ExplodingProjectile : Projectile
     // Method to handle the explosion
     private void Explode()
     {
-        // Log explosion event (for debugging)
-        Debug.Log("Projectile exploded!");
-
-        // Get all colliders within the explosion radius that are in the damageable layer
-        Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(transform.position, explosionRadius, damageableLayer);
-
-        // Iterate through the objects and apply damage or effects
-        foreach (Collider2D obj in objectsInRange)
+        Bomb bomb = new Bomb();
+        for(int i = 0; i < 10; i++)
         {
-            if (obj.CompareTag("Enemy")) // If it's an enemy, apply damage
-            {
-                // Example: Apply damage to the enemy (assuming the enemy has a health component)
-                EnemyAbstractScript enemy = obj.GetComponent<EnemyAbstractScript>();
-                if (enemy != null)
-                {
-                    enemy.death();
-                    // Call the TakeDamage method with the projectile's damage
-                }
-            }
+            float rand = Random.Range(0, 2*Mathf.PI);
+            Debug.Log(rand);
+            bomb.shoot(transform.position, transform.position + new Vector3(Mathf.Cos(rand), Mathf.Sin(rand), 0));
         }
-
-        // Destroy the projectile object after the explosion
+        
         Destroy(gameObject);
-    }
-
-    // Optional: Visualize the explosion radius in the Scene view
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
-    }
-
-    // Override OnTriggerEnter2D for handling direct hits before explosion
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (owner == 0 && collision.gameObject.CompareTag("Enemy")) // Direct hit by player projectile
-        {
-            Explode(); // Trigger explosion on direct hit
-        }
     }
 }

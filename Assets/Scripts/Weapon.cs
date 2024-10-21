@@ -15,7 +15,6 @@ public abstract class Weapon
         this.melee = melee;
         this.projectile = (GameObject)Resources.Load("Prefabs/" + projectile + "Projectile");
         this.sprite = Resources.Load<Sprite>("Sprites/" + sprite);
-        Debug.Log(this.sprite.ToString());
         player = GameObject.Find("Player");
     }
 

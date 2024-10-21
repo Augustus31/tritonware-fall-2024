@@ -10,7 +10,7 @@ public abstract class Projectile : MonoBehaviour
     public float damage;
     public int owner; //0 for player, 1 for enemy
     public Vector2 target;
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -25,20 +25,25 @@ public abstract class Projectile : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.tag == "Obstacle")
+        {
+            Destroy(gameObject);
+        }
+
         if(owner == 0)
         {
             if (collision.gameObject.tag == "Enemy")
             {
-                Destroy(gameObject);
                 collision.gameObject.GetComponent<EnemyAbstractScript>().death();
+                Destroy(gameObject);
             }
         }
         else if(owner == 1)
         {
             if (collision.gameObject.tag == "Player")
             {
-                Destroy(gameObject);
                 collision.gameObject.GetComponent<PlayerScript>().death();
+                Destroy(gameObject);                
             }
         }
     }

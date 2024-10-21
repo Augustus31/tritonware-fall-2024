@@ -9,7 +9,27 @@ public abstract class EnemyAbstractScript : MonoBehaviour
     public int[,] grid;
     protected GameObject player;
     protected Rigidbody2D rb;
+    protected SpriteRenderer rend;
     static readonly (int, int)[] directions = { (-1, 0), (1, 0), (0, -1), (0, 1) };
+
+    public virtual void Start()
+    {
+        player = GameObject.Find("Player");
+        rb = GetComponent<Rigidbody2D>();
+        rend = GetComponent<SpriteRenderer>();
+    }
+
+    public virtual void Update()
+    {
+        if(rb.velocity.x < 0)
+        {
+            rend.flipX = false;
+        }
+        else
+        {
+            rend.flipX = true;
+        }
+    }
 
     public void death()
     {

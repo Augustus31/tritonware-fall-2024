@@ -14,7 +14,7 @@ public class WeaponObjectScript : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        weapon1 = new Pistol();
+        weapon1 = new ShrapnelGun();
         weapon2 = new Shotgun();
         rend = GetComponent<SpriteRenderer>();
         rend.sprite = weapon1.getSprite();
@@ -25,8 +25,19 @@ public class WeaponObjectScript : MonoBehaviour
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         gameObject.transform.rotation = Quaternion.identity;
-        gameObject.transform.Rotate(new Vector3(0, 0, 180*Mathf.Atan2(mousePos.y - player.transform.position.y, mousePos.x - player.transform.position.x)/Mathf.PI));
+        float rot = 180 * Mathf.Atan2(mousePos.y - player.transform.position.y, mousePos.x - player.transform.position.x) / Mathf.PI;
+        gameObject.transform.Rotate(new Vector3(0, 0, rot));
         transform.position = new Vector3((mousePos - player.transform.position).x, (mousePos - player.transform.position).y, 0).normalized * distance + player.transform.position;
+
+        Debug.Log(rot);
+        if(rot > 90 || rot < -90)
+        {
+            rend.flipY = true;
+        }
+        else
+        {
+            rend.flipY = false;
+        }
 
         if (Input.GetMouseButton(((int)MouseButton.LeftMouse)))
         {

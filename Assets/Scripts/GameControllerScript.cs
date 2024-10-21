@@ -25,8 +25,8 @@ public class GameControllerScript : MonoBehaviour
     {
         level = 1;
 
-        GameObject collectible = GameObject.Instantiate((GameObject)Resources.Load("Prefabs/CollectibleWeapon"), transform.position - new Vector3(3,-3,0), Quaternion.identity);
-        collectible.GetComponent<CollectibleWeaponScript>().weapon = new Shotgun();
+        GameObject collectible = GameObject.Instantiate((GameObject)Resources.Load("Prefabs/CollectibleWeapon"), transform.position - new Vector3(-3,-5,0), Quaternion.identity);
+        collectible.GetComponent<CollectibleWeaponScript>().weapon = new Pistol();
 
         GameObject rangedEnemy = GameObject.Instantiate((GameObject)Resources.Load("Prefabs/RangedEnemy"), transform.position - new Vector3(-3, -3, 1), Quaternion.identity);
         rangedEnemy.GetComponent<RangedEnemyScript>().weapon = new StormPistol();
